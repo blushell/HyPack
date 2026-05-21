@@ -33,9 +33,9 @@ export default function RootLayout({
       signInUrl="/sign-in"
       signUpUrl="/sign-up"
       signInFallbackRedirectUrl="/modpacks"
-      signUpFallbackRedirectUrl="/sign-up/complete"
+      signUpFallbackRedirectUrl="/modpacks"
       signInForceRedirectUrl="/modpacks"
-      signUpForceRedirectUrl="/sign-up/complete"
+      signUpForceRedirectUrl="/modpacks"
       afterSignOutUrl="/"
     >
       <html

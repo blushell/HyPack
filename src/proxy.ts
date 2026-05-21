@@ -1,6 +1,4 @@
-import { clerkMiddleware, clerkClient, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
-import { isUsernameBanned } from "@/lib/auth/banned-usernames";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 const isProtectedRoute = createRouteMatcher([
   "/modpacks",
@@ -11,24 +9,6 @@ const isProtectedRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
-  const authObject = await auth();
-
-  if (authObject.userId && isProtectedRoute(req)) {
-    try {
-      const client = await clerkClient();
-      const user = await client.users.getUser(authObject.userId);
-
-      if (user.username && isUsernameBanned(user.username)) {
-        await client.users.deleteUser(authObject.userId);
-        return NextResponse.redirect(
-          new URL("/sign-up?error=banned_username", req.url),
-        );
-      }
-    } catch (error) {
-      console.error("Banned username check failed:", error);
-    }
-  }
-
   if (isProtectedRoute(req)) {
     await auth.protect();
   }

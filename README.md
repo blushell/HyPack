@@ -100,11 +100,43 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Production deployment (Vercel + Clerk)
 
-When deploying to production (e.g. [hypack.ca](https://www.hypack.ca)):
+**Git pushes do not auto-deploy.** [`vercel.json`](vercel.json) sets `git.deploymentEnabled` to `false` so only manual triggers deploy production.
 
-1. **Vercel** — set all env vars for the **Production** environment using `pk_live_` / `sk_live_`, then **redeploy** (required for `NEXT_PUBLIC_*` vars).
-2. **Clerk domains** — add `hypack.ca`, `www.hypack.ca`, and complete DNS for the Clerk Frontend API host (e.g. `clerk.hypack.ca`). Without that DNS record, sign-in UI will not load.
-3. **OAuth (Google, GitHub, Discord, …)** — configure **Production** social connections separately from Development. Use Clerk’s redirect URI (typically `https://clerk.<your-domain>/v1/oauth_callback`) in each provider’s developer console.
+### Deploy when you are ready
+
+**Option A — Vercel dashboard**
+
+1. [vercel.com](https://vercel.com) → your HyPack project → **Deployments**
+2. Open the latest production deployment → **⋯** → **Redeploy** (or **Create Deployment** and pick the branch/commit)
+
+**Option B — Vercel CLI**
+
+```bash
+npx vercel deploy --prod
+```
+
+**Option C — GitHub Actions** (recommended)
+
+1. Add these [repository secrets](https://github.com/blushell/HyPack/settings/secrets/actions):
+   - `VERCEL_TOKEN` — [Vercel account token](https://vercel.com/account/settings/tokens)
+   - `VERCEL_ORG_ID` — Project **Settings** → General → Team / Personal ID, or `.vercel/project.json` → `orgId`
+   - `VERCEL_PROJECT_ID` — same page or `.vercel/project.json` → `projectId`
+2. On GitHub: **Actions** → **Deploy to Production** → **Run workflow** (pick branch, then **Run workflow**)
+
+Workflow file: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+
+**Option D — Deploy Hook**
+
+1. Project **Settings** → **Deploy Hooks** → create a hook for the `main` branch
+2. POST to the hook URL when you want a release
+
+### First-time / env setup
+
+1. **Vercel** — set all env vars for **Production** (`pk_live_` / `sk_live_`, Supabase, CurseForge, etc.). Redeploy after changing `NEXT_PUBLIC_*` vars.
+2. **Clerk domains** — add `hypack.ca`, `www.hypack.ca`, and DNS for the Clerk Frontend API host (e.g. `clerk.hypack.ca`).
+3. **OAuth** — configure **Production** social connections (Google, GitHub, Discord, …) with Clerk’s redirect URI (`https://clerk.<your-domain>/v1/oauth_callback`).
+
+To turn automatic deploys back on, set `"deploymentEnabled": true` in `vercel.json` (or per-branch — see [Vercel git configuration](https://vercel.com/docs/project-configuration/git-configuration)).
 
 ## Project structure
 

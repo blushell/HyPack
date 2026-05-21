@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart } from "lucide-react";
+import { Coffee, Heart } from "lucide-react";
 import { DiscordIcon } from "@/components/icons/discord-icon";
 import { XIcon } from "@/components/icons/x-icon";
 
@@ -23,6 +23,15 @@ export function Footer() {
           >
             <XIcon className="h-4 w-4 shrink-0" />
             Follow on X
+          </Link>
+          <Link
+            href="https://ko-fi.com/jonestown"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-[#ff5e5b]/15 px-5 py-2.5 text-sm font-medium text-[#ffc9c7] ring-1 ring-[#ff5e5b]/25 transition hover:bg-[#ff5e5b]/20"
+          >
+            <Coffee className="h-4 w-4 shrink-0" aria-hidden />
+            Donate
           </Link>
         </div>
 

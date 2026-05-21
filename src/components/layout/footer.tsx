@@ -16,7 +16,9 @@ export function Footer() {
             Join the Discord
           </Link>
           <Link
-            href="#"
+            href="https://x.com/jonestowndev"
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-white/5 px-5 py-2.5 text-sm font-medium text-zinc-300 ring-1 ring-white/10 transition hover:bg-white/10"
           >
             <XIcon className="h-4 w-4 shrink-0" />
@@ -27,10 +29,6 @@ export function Footer() {
         <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-zinc-500">
           <Link href="/changelog" className="transition hover:text-zinc-300">
             Changelog
-          </Link>
-          <span aria-hidden="true">·</span>
-          <Link href="#" className="transition hover:text-zinc-300">
-            Privacy Policy
           </Link>
           <span aria-hidden="true">·</span>
           <Link

@@ -1,12 +1,11 @@
 import Link from "next/link";
+import { GuidesNav } from "@/components/layout/guides-nav";
 import { HeaderActions } from "@/components/layout/header-actions";
 import { Logo } from "@/components/layout/logo";
 
 const navLinks = [
   { label: "Explore", href: "/explore" },
-  { label: "Mods", href: "#" },
-  { label: "Blog", href: "#" },
-  { label: "Help guide", href: "#" },
+  { label: "Blog", href: "/blog" },
 ] as const;
 
 export function Header() {
@@ -28,6 +27,7 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          <GuidesNav />
         </nav>
 
         <HeaderActions />

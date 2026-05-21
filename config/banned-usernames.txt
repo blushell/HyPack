@@ -1,7 +1,9 @@
 # One username per line (case-insensitive). Lines starting with # are ignored.
 admin
 hypack
-moderator
 support
-staff
+root
 system
+owner
+staff
+moderator

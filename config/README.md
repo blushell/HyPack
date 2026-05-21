@@ -2,12 +2,13 @@
 
 Edit `banned-usernames.txt` to block usernames at sign-up. Matching is **case-insensitive** and exact (e.g. `Admin` blocks `admin`).
 
-## Clerk webhook (required)
+## How it works (no webhooks)
 
-Enforcement runs in `POST /api/webhooks/clerk` when Clerk sends `user.created` or `user.updated` events.
+1. After sign-up, users are sent to `/sign-up/complete`, which checks their username and removes the account if it is banned.
+2. Protected modpack routes also check the username on each visit (covers OAuth sign-up and username changes).
 
-1. In [Clerk Dashboard → Webhooks](https://dashboard.clerk.com/), add an endpoint: `https://your-domain.com/api/webhooks/clerk`
-2. Subscribe to **user.created** and **user.updated**
-3. Copy the **Signing secret** into `.env` as `CLERK_WEBHOOK_SIGNING_SECRET`
+Banned users are redirected to `/sign-up?error=banned_username` with an error message.
 
-New sign-ups with a banned username are deleted. Existing users who change to a banned username are banned.
+## Optional API
+
+`POST /api/auth/check-username` with `{ "username": "example" }` returns `{ "allowed": true }` or `403` if banned. Use this if you add a custom sign-up form later.

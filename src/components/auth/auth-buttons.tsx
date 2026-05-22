@@ -11,9 +11,9 @@ export function AuthButtons() {
         <SignInButton mode="redirect">
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-xl border border-sky-400/30 bg-sky-500/10 px-4 py-2 text-sm font-medium text-sky-100 transition hover:border-sky-300/50 hover:bg-sky-500/15"
+            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-zinc-200 ring-1 ring-white/10 transition hover:border-violet-400/30 hover:bg-violet-500/10 hover:text-white hover:ring-violet-400/25"
           >
-            <User className="h-4 w-4" />
+            <User className="h-4 w-4 shrink-0" />
             Sign in
           </button>
         </SignInButton>

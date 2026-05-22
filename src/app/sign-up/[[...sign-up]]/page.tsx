@@ -1,6 +1,5 @@
 import { SignUp } from "@clerk/nextjs";
-import { SignUpBlockedMessage } from "@/components/auth/sign-up-blocked-message";
-import { SignUpSessionReset } from "@/components/auth/sign-up-session-reset";
+import { AuthErrorMessage } from "@/components/auth/auth-error-message";
 import { Logo } from "@/components/layout/logo";
 import { clerkAppearance } from "@/lib/clerk-appearance";
 
@@ -18,10 +17,8 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
       </div>
 
       <div className="hypack-clerk flex flex-1 flex-col items-center justify-center px-6 pb-16">
-        <SignUpSessionReset error={error}>
-          <div className="w-full max-w-md">
-            <SignUpBlockedMessage error={error} />
-          </div>
+        <div className="w-full max-w-md">
+          <AuthErrorMessage error={error} />
           <SignUp
             appearance={clerkAppearance}
             routing="path"
@@ -30,7 +27,7 @@ export default async function SignUpPage({ searchParams }: SignUpPageProps) {
             forceRedirectUrl="/sign-up/complete"
             fallbackRedirectUrl="/sign-up/complete"
           />
-        </SignUpSessionReset>
+        </div>
       </div>
     </div>
   );

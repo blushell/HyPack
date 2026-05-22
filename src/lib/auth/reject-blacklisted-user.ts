@@ -37,3 +37,16 @@ export async function rejectBlacklistedUser(
 
   return true;
 }
+
+export async function revokeStaleSession(sessionId: string | null | undefined) {
+  if (!sessionId || !process.env.CLERK_SECRET_KEY) {
+    return;
+  }
+
+  try {
+    const client = await clerkClient();
+    await client.sessions.revokeSession(sessionId);
+  } catch {
+    // Session may already be invalid.
+  }
+}

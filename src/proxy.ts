@@ -1,6 +1,7 @@
 import { clerkMiddleware, clerkClient, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { isUsernameBlacklisted } from "@/lib/auth/blacklisted-usernames";
+import { blacklistedUsernameRejectedPath } from "@/lib/auth/enforce-allowed-username";
+import { rejectBlacklistedUser } from "@/lib/auth/reject-blacklisted-user";
 
 const isProtectedRoute = createRouteMatcher([
   "/modpacks",
@@ -17,11 +18,15 @@ export default clerkMiddleware(async (auth, req) => {
     try {
       const client = await clerkClient();
       const user = await client.users.getUser(authObject.userId);
+      const wasRejected = await rejectBlacklistedUser(
+        authObject.userId,
+        user.username,
+        authObject.sessionId,
+      );
 
-      if (user.username && isUsernameBlacklisted(user.username)) {
-        await client.users.deleteUser(authObject.userId);
+      if (wasRejected) {
         return NextResponse.redirect(
-          new URL("/sign-up?error=blacklisted_username", req.url),
+          new URL(blacklistedUsernameRejectedPath, req.url),
         );
       }
     } catch (error) {

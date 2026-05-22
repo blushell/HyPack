@@ -1,26 +1,23 @@
-import { auth, clerkClient, currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import { isUsernameBlacklisted } from "@/lib/auth/blacklisted-usernames";
+import { rejectBlacklistedUser } from "@/lib/auth/reject-blacklisted-user";
 
-const blacklistedUsernameRedirect = "/sign-up?error=blacklisted_username";
+export const blacklistedUsernameRejectedPath = "/sign-up/rejected";
 
 export async function enforceAllowedUsername() {
-  const { userId } = await auth();
+  const { userId, sessionId } = await auth();
   if (!userId) {
     return;
   }
 
   const user = await currentUser();
-  if (!user?.username || !isUsernameBlacklisted(user.username)) {
-    return;
-  }
+  const wasRejected = await rejectBlacklistedUser(
+    userId,
+    user?.username,
+    sessionId,
+  );
 
-  try {
-    const client = await clerkClient();
-    await client.users.deleteUser(userId);
-  } catch (error) {
-    console.error("Failed to delete user with blacklisted username:", error);
+  if (wasRejected) {
+    redirect(blacklistedUsernameRejectedPath);
   }
-
-  redirect(blacklistedUsernameRedirect);
 }

@@ -24,15 +24,15 @@ export function Footer() {
             <XIcon className="h-4 w-4 shrink-0" />
             Follow on X
           </Link>
-          <Link
+          <a
             href="https://ko-fi.com/jonestown"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-[#ff5e5b]/15 px-5 py-2.5 text-sm font-medium text-[#ffc9c7] ring-1 ring-[#ff5e5b]/25 transition hover:bg-[#ff5e5b]/20"
           >
             <Coffee className="h-4 w-4 shrink-0" aria-hidden />
             Donate
-          </Link>
+          </a>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-zinc-500">

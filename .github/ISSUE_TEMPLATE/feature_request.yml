@@ -4,8 +4,9 @@ title: "[Feature]: "
 labels: ["enhancement"]
 body:
   - type: markdown
-    value: |
-      Share an idea for HyPack. Feature requests help us prioritize what to build next.
+    attributes:
+      value: |
+        Share an idea for HyPack. Feature requests help us prioritize what to build next.
 
   - type: textarea
     id: feature-problem

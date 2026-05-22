@@ -4,8 +4,9 @@ title: "[Bug]: "
 labels: ["bug"]
 body:
   - type: markdown
-    value: |
-      Thanks for helping improve HyPack. Please search [existing issues](https://github.com/blushell/HyPack/issues) first to avoid duplicates.
+    attributes:
+      value: |
+        Thanks for helping improve HyPack. Please search [existing issues](https://github.com/blushell/HyPack/issues) first to avoid duplicates.
 
   - type: dropdown
     id: bug-environment

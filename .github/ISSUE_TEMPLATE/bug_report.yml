@@ -8,7 +8,7 @@ body:
       Thanks for helping improve HyPack. Please search [existing issues](https://github.com/blushell/HyPack/issues) first to avoid duplicates.
 
   - type: dropdown
-    id: environment
+    id: bug-environment
     attributes:
       label: Where did this happen?
       options:
@@ -19,7 +19,7 @@ body:
       required: true
 
   - type: textarea
-    id: description
+    id: bug-description
     attributes:
       label: What happened?
       description: A clear description of the bug.
@@ -28,7 +28,7 @@ body:
       required: true
 
   - type: textarea
-    id: steps
+    id: bug-steps
     attributes:
       label: Steps to reproduce
       description: How can we reproduce this?
@@ -40,7 +40,7 @@ body:
       required: true
 
   - type: textarea
-    id: expected
+    id: bug-expected
     attributes:
       label: Expected behavior
       description: What did you expect to happen?
@@ -48,7 +48,7 @@ body:
       required: true
 
   - type: textarea
-    id: actual
+    id: bug-actual
     attributes:
       label: Actual behavior
       description: What actually happened?
@@ -56,42 +56,42 @@ body:
       required: true
 
   - type: input
-    id: modpack
+    id: bug-modpack
     attributes:
       label: Modpack URL or ID (if relevant)
       placeholder: https://www.hypack.ca/modpacks/… or modpack UUID
 
   - type: input
-    id: browser
+    id: bug-browser
     attributes:
-      label: Browser & version
+      label: Browser and version
       placeholder: Chrome 124, Firefox 125, etc.
 
   - type: input
-    id: os
+    id: bug-os
     attributes:
       label: OS
       placeholder: Windows 11, macOS 14, etc.
 
   - type: textarea
-    id: logs
+    id: bug-logs
     attributes:
       label: Console or server logs
       description: Paste any relevant errors from the browser console or terminal.
       render: shell
 
   - type: checkboxes
-    id: terms
+    id: bug-checklist
     attributes:
       label: Checklist
       options:
         - label: I have searched existing issues for duplicates
           required: true
-        - label: I am running a current version of HyPack (or describe my fork below)
+        - label: I am running a current version of HyPack
           required: true
 
   - type: textarea
-    id: extra
+    id: bug-extra
     attributes:
       label: Anything else?
       description: Screenshots, screen recordings, or other context.
